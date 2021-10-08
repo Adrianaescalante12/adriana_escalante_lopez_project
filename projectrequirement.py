@@ -15,6 +15,8 @@ A news aggregator app where users can easily access government related articles.
 - comments on articles (3.0)
 - bucketed starred/bookmarked articles (3.0)
 
+### Data Model Info:
+- 
 
 ### Roadmap
 

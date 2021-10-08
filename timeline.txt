@@ -1,0 +1,40 @@
+Sprint 1
+
+Tues 10/5 Get Project Idea and Data Model Approved
+Thurs 10/7 Create Timeline/ Work on Workflow
+Sat 10/9 Begin work on API and get it to start displaying on localhost:5000 (start the server.py)
+
+Tues 10/12 Create database (model.py) (figure out if the keyword table is needed on 10/9)
+Thurs 10/14 Finish model.py
+Sat 10/16 Begin work on crud.py (subscriber signup, subscriber add to database,)
+
+Tues 10/19 work on crud.py (bookmark list)
+Thurs 10/21
+Sat 10/23
+
+Tues 10/26
+Thurs 10/28
+Sat 10/30
+
+Sprint 2
+
+Tues 11/2
+Thurs 11/4
+Sat 11/6
+
+Tues 11/9
+Thurs 11/11
+Sat  11/13
+
+Tues 11/16
+Thurs 11/18
+Sat 11/20
+
+Tues 11/23
+Thurs 11/25
+Sat 11/27
+
+Tues 11/30
+Thurs 12/2
+
+Sprint 3

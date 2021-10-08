@@ -1,0 +1,21 @@
+1. User goes to the website and lands on the homepage
+    - Hompage Contains:
+        - Title: GovFix
+        - What is it? What does it provide?
+        - Who uses it? Charts based on occupation and use case
+        - Login form
+        - Signup form
+
+2. Upon log in user is redirected to a different page where they can see the RSS feed
+    - RSS feed contained to 3/4's of the page
+    - Bookmarked articles contained to 1/4 of page on left hand side
+
+3. Upon signup form, user is alerted that account was created successfully and to now login using the 
+log in form. (alert keeps user on same page)
+
+4. RSS Feed 
+    - Article titles and newsource and STAR to bookmark are shown, upon clicking into 
+    it user is redirected to a different page.
+    - Redirect/Description page - contains article title, author, newsource, description, URL Link 
+    - If someone bookmarks a page duplicate (?) that article item and add it to the bookmark section
+        - Make sure that it still redirects the user to the description page

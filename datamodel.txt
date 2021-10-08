@@ -1,0 +1,31 @@
+Subscriber Table (1.0)
+- Subscriber Id (PRIMARY KEY)
+- Full name (VARCHAR 180)
+- Email (VARCHAR 180)
+- Password (VARCHAR 50)
+- Occupation (VARCHAR 180) - harcode this on frontend dropdown
+- Use Case (VARCHAR 100) - harcode this on the frontend dropdown
+
+Article Keyword Table (1.0)
+- Article Keyword Id (PRIMARY KEY)
+- Keyword_Phrases (VARCHAR 180)
+
+Bookmarked Articles (1.0)
+- Article Id (PRIMARY KEY)
+- Article Title (VARCHAR 200)
+- Article Author (VARCHAR 180)
+- Article URL ?
+- Article Description (VARCHAR 500)
+- Subscriber Id (FOREIGN KEY)
+- Bookmark Date (DATETIME)
+
+Comment Table (2.0)
+- Comment Id (PRIMARY KEY)
+- Subscriber Id (FOREIGN KEY)
+- Comment (VARCHAR 1000)
+- Article Id (FOREIGN KEY)
+
+Article Folders Table (3.0)
+- Folder Id (PRIMARY KEY)
+- Folder name (VARCHAR 200)
+- Article Id (FOREIGN KEY)
