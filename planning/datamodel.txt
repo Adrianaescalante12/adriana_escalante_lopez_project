@@ -3,8 +3,23 @@ Subscriber Table (1.0)
 - Full name (VARCHAR 180)
 - Email (VARCHAR 180)
 - Password (VARCHAR 50)
-- Occupation (VARCHAR 180) - harcode this on frontend dropdown
-- Use Case (VARCHAR 100) - harcode this on the frontend dropdown
+- Industry (VARCHAR 50) - harcode this on frontend dropdown 
+            1	Healthcare and medicine
+            2	Arts and entertainment
+            3	Business administration
+            4	Industrial and manufacturing
+            5	Law enforcement and armed forces
+- Use Case (VARCHAR 50) - harcode this on the frontend dropdown
+            1 Personal
+            2 Customer Service
+            3 Sales
+            4 Marketing
+            5 Administrative
+            6 Public relations
+            7 Purchasing and Operations
+            8 Finance
+            9 Information Technology
+
 
 Article Keyword Table (1.0)
 - Article Keyword Id (PRIMARY KEY)
@@ -12,7 +27,7 @@ Article Keyword Table (1.0)
 
 Bookmarked Articles (1.0)
 - Article Id (PRIMARY KEY)
-- Article Title (VARCHAR 200)
+- Article Title (VARCHAR 250)
 - Article Author (VARCHAR 180)
 - Article URL ?
 - Article Description (VARCHAR 500)
