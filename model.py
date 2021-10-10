@@ -5,29 +5,29 @@ from datetime import datetime
 db = SQLAlchemy()
 
 class Subscriber(db.Model):
-    """A subsscriber"""
+    """A subscriber"""
 
     __tablename__ = "subscribers"
 
     subscriber_id = db.Column(db.Integer, autoincrement=True, primary_key=True)
-    full_name = db.Column(db.String(180))
-    email = db.Column(db.String(180), unique=True)
-    password = db.Column(db.String(50))
-    industry = db.Column(db.String(50))
-    use_case = db.Column(db.String(50))
+    full_name = db.Column(db.String(180), nullable=False)
+    email = db.Column(db.String(180), unique=True, nullable=False)
+    password = db.Column(db.String(50), nullable=False)
+    industry = db.Column(db.String(50), nullable=False)
+    use_case = db.Column(db.String(50), nullable=False)
 
 class Bookmark(db.Model):
 
     __tablename__ = "bookmarks"
 
     article_id = db.Column(db.Integer, autoincrement=True, primary_key=True)
-    title = db.Column(db.String(250))
-    author = db.Column(db.String(180))
-    url = db.Column(db.Text)
+    title = db.Column(db.String(250), nullable=False)
+    author = db.Column(db.String(180), nullable=False)
+    url = db.Column(db.Text, nullable=False)
     bookmark_date = db.Column(db.DateTime)
-    subscriber_id = db.Column(db.Integer, db.ForeignKey(subscriber.subscriber_id))
+    subscriber_id = db.Column(db.Integer, db.ForeignKey(Subscriber.subscriber_id))
 
-    subscriber = db.relationship("Subscriber", backref="govfix")
+    subscriber = db.relationship("Subscriber", backref="bookmarks")
 
 
 
