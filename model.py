@@ -16,6 +16,9 @@ class Subscriber(db.Model):
     industry = db.Column(db.String(50), nullable=False)
     use_case = db.Column(db.String(50), nullable=False)
 
+    def __repr__(self):
+        return f'<Subscriber subscriber_id={self.subscriber_id} fname={self.full_name}>'
+
 class Bookmark(db.Model):
 
     __tablename__ = "bookmarks"
@@ -29,6 +32,8 @@ class Bookmark(db.Model):
 
     subscriber = db.relationship("Subscriber", backref="bookmarks")
 
+    def __repr__(self):
+        return f'<Bookmark article_id={self.article_id} title={self.title} author={self.author}>'
 
 
 
