@@ -24,9 +24,11 @@ class Bookmark(db.Model):
     __tablename__ = "bookmarks"
 
     article_id = db.Column(db.Integer, autoincrement=True, primary_key=True)
+    source = db.Column(db.String(250), nullable=False)
     title = db.Column(db.String(250), nullable=False)
     author = db.Column(db.String(180), nullable=False)
     url = db.Column(db.Text, nullable=False)
+    description = db.Column(db.String, nullable=False)
     bookmark_date = db.Column(db.DateTime)
     subscriber_id = db.Column(db.Integer, db.ForeignKey(Subscriber.subscriber_id))
 

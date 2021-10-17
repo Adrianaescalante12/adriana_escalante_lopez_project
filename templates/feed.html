@@ -1,0 +1,34 @@
+
+<h1> GovFix Article Feed </h1>
+
+<div id="article-request-results">
+<body>
+    <table>
+        <thead>Articles</thead>
+        <tr>
+        <th>source</th>
+            {% for article in source %}
+            <td> {{source}} </td>
+            {% endfor %}
+        <th>title</th>
+            {% for article in title %}
+            <td> {{title}} </td>
+            {% endfor %}
+        <th>author</th>
+            {% for article in author %}
+            <td> {{author}} </td>
+            {% endfor %}
+        <th>description</th>
+            {% for article in description %}
+            <td> {{description}} </td>
+            {% endfor %}
+        <th>url</th>
+            {% for article in url %}
+            <td>{{url}}</td>
+            {% endfor %}
+        </tr>
+
+    </table>
+
+</body>
+</div>
