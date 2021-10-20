@@ -1,34 +1,32 @@
 
-<h1> GovFix Article Feed </h1>
+<h1> Gov-Fix Article Feed </h1>
 
 <div id="article-request-results">
 <body>
-    <table>
-        <thead>Articles</thead>
-        <tr>
-        <th>source</th>
-            {% for article in source %}
-            <td> {{source}} </td>
-            {% endfor %}
-        <th>title</th>
-            {% for article in title %}
-            <td> {{title}} </td>
-            {% endfor %}
-        <th>author</th>
-            {% for article in author %}
-            <td> {{author}} </td>
-            {% endfor %}
-        <th>description</th>
-            {% for article in description %}
-            <td> {{description}} </td>
-            {% endfor %}
-        <th>url</th>
-            {% for article in url %}
-            <td>{{url}}</td>
-            {% endfor %}
-        </tr>
 
-    </table>
+    {% for article in article_data %}
+        <table>
+            <tr>
+            <th>Source</th>
+            <td>{{article['source']}}</td>
+            <th>Title</th>
+            <td>{{article['title']}}</td>
+            <th>Author</th>
+            <td>{{article['author']}}</td>
+            <th>Description</th>
+            <td>{{article['description']}}</td>
+            <th>URL</th>
+            <td>{{article['url']}}</td>
+            <th>Bookmark?</th>
+            <td>
+                <form>
+                    <input type="checkbox" name="bookmark" value="Bookmark">
+                    <label>Bookmark</label>  
+                </form>
+            </td>
+            </tr>
+        </table>
+    {% endfor %}
 
 </body>
 </div>
