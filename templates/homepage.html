@@ -1,51 +1,63 @@
-<h1>Welcome GovFix subscribers!</h1>
+<h1>Welcome to GovFix!</h1>
 
 <body>
-    <h4>Subscriber Sign In</h4>
-    <form>
-       <label>Username</label>
-       <input type=text name=username>
-       <label>Password</label>
-       <input type=password name=password>
-    </form> 
+    <div>
+       <h4>Subscriber Sign In</h4>
 
-    <div id=subscriber_form>
+        <form>
+        <label>Email</label>
+        <input type=text name=email>
+        <label>Password</label>
+        <input type=password name=password>
+        <form>
+            <button type="submit">Sign In</button>
+          </form>
+        </form> 
+    </div>
+
+    <div id=subscriber_signup>
+        
         <h4>Subscriber Sign Up</h4>
 
-        <form>
-            <label>Pick a Username</label>
-            <input type=text name=username>
+        <form id=subscriber_form>
+            <label>Full Name:</label>
+            <input type=text name=fullname>
+            <br> </br>
+            <label>Email Address</label>
+            <input type=text name=email>
+
             <label>Pick a Password</label>
             <input type=password name=password>
+            <br> </br>
+            
+            What industry do you work in?
+            <select name="industry">
+                <option value="blank"> </option>
+                <option value="healthcare and medicine">Healthcare and medicine</option>
+                <option value="arts and entertainment">Arts and entertainment</option>
+                <option value="business administration">Business administration</option>
+                <option value="industrial and manufacturing">Industrial and manufacturing</option>
+                <option value="law enforcement and armed forces">Law enforcement and armed forces</option>
+                <option value="software and technology">Software and Technology</option>
+            </select>
+            
+            What are you using this information for?
+            <select name="usecase">
+                <option value="blank"> </option>
+                <option value="personal">Personal</option>
+                <option value="customer service">Customer Service</option>
+                <option value="sales">Sales</option>
+                <option value="marketing">Marketing</option>
+                <option value="administrative">Administrative</option>
+                <option value="public relations">Public Relations</option>
+                <option value="purchasing and operations">Purchasing and Operations</option>
+                <option value="finance">Finance</option>
+                <option value="information technology">Information Technology</option>
+            </select>
+
+            <form>
+                <button type="submit">Sign Up</button>
+            </form>
         </form>
-
-        What do you do for work?
-        <form>
-        <select name="occupation">
-            <option value="blank"> </option>
-            <option value="healthcare and medicine">Healthcare and medicine</option>
-            <option value="arts and entertainment">Arts and entertainment</option>
-            <option value="business administration">Business administration</option>
-            <option value="industrial and manufacturing">Industrial and manufacturing</option>
-            <option value="law enforcement and armed forces">Law enforcement and armed forces</option>
-            <option value="software and technology">Software and Technology</option>
-        </select>
-        </form> 
-
-        What are you using this information for?
-        <form>
-        <select name="use_case">
-            <option value="blank"> </option>
-            <option value="personal">Personal</option>
-            <option value="customer service">Customer Service</option>
-            <option value="sales">Sales</option>
-            <option value="marketing">Marketing</option>
-            <option value="administrative">Administrative</option>
-            <option value="public relations">Public Relations</option>
-            <option value="purchasing and operations">Purchasing and Operations</option>
-            <option value="finance">Finance</option>
-            <option value="information technology">Information Technology</option>
-        </select>
-        </form> 
     </div>
 </body>

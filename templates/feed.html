@@ -19,14 +19,18 @@
             <td>{{article['url']}}</td>
             <th>Bookmark?</th>
             <td>
-                <form>
-                    <input type="checkbox" name="bookmark" value="Bookmark">
-                    <label>Bookmark</label>  
+                <form id=bookmark>
+                    <input type="checkbox" name="bookmark" value="Bookmark">  
                 </form>
             </td>
             </tr>
         </table>
+        <form>
+            <button type="submit">Bookmark</button>
+        </form>
     {% endfor %}
 
 </body>
 </div>
+
+<!-- how to call your server to get those articles/ajax -->
