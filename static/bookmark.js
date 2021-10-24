@@ -1,9 +1,10 @@
 "use strict";
 // loop over each form
-for (const x of bookmark) {
-  const bookmarkButton = document.querySelectorAll("#bookmark");
+// Loop used to be up here but it loops over the n amount of articles n amount of times
+const bookmark = document.querySelectorAll("#bookmark");
 
-  bookmarkButton.addEventListener('click', (evt) => {
+for (const x of bookmark) {
+  x.addEventListener('click', (evt) => {
       evt.preventDefault();
       const bookmarkButton = evt.target;
       console.log(evt.target);});

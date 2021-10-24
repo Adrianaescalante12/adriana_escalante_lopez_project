@@ -3,7 +3,7 @@ from model import connect_to_db
 import json
 import requests
 from datetime import datetime, timedelta
-# import crud
+import crud
 import os
 from jinja2 import StrictUndefined
 
@@ -26,7 +26,7 @@ def homepage():
 
 @app.route("/article-feed")
 def article_feed():
-    """Connect to the API"""
+    """Connect to the NEWSAPI to get articles from past two weeks based on keywords and popularity"""
     # url = f'https://newsapi.org/v2/top-headline?apiKey={API_KEY}'
     url = f'https://newsapi.org/v2/everything'
     payload = {'language': 'en',
@@ -54,16 +54,32 @@ def article_feed():
    
     #left side what I call in jinja template, right side server object/variable
 
-# @app.route('/subscriber-sign-up', method=['POST'])
-# def register_subscriber():
-#     fullname = request.form.get('fullname')
-#     email = request.form.get('email')
-#     password = request.form.get('password')
-#     industry = request.form.get('industry')
-#     usecase = request.form.get('usecase')
+@app.route("/subscriber-sign-up", methods=["POST"])
+def register_subscriber():
+    """Create a new subscriber"""
+    fullname = request.form.get('fullname')
+    email = request.form.get('email')
+    password = request.form.get('password')
+    industry = request.form.get('industry')
+    usecase = request.form.get('usecase')
 
+    subscriber = crud.get_subscriber_by_email(email)
+    print(subscriber)
+    
+    if subscriber:
+        flash("There seems to be an account associated to this email already.")
+        print("reached the if subscriber")
+    else:
+        crud.create_subscriber(fullname, email, password, industry, usecase)
+        flash("Account created successfully. Try logging in.")
+        print("reached the else create subscriber")
+    
+    return redirect("/")
+
+# the above is working but the flash is not. Why though?
 @app.route("/handle-bookmarks", methods=["POST"])
 def handle_bookmarks():
+    """Create a new bookmark"""
     source = request.json.get("source")
     # title = request.json.get("title")
     # author = request.json.get("author")
@@ -75,11 +91,6 @@ def handle_bookmarks():
     return source
 
     #call the crud function once you get the form inputs right
-
-
-
-
-
 
 
 if __name__ == "__main__":

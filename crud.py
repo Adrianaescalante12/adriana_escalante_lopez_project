@@ -1,6 +1,6 @@
 from model import db, Subscriber, Bookmark, connect_to_db
 
-def create_subscriber(full_name, email, password, industry, use_case):
+def create_subscriber(fullname, email, password, industry, usecase):
     #
     subscriber =  Subscriber(full_name=fullname,
                             email=email,
@@ -27,8 +27,12 @@ def create_bookmark(source, title, author, description, url, bookmark_date, subs
 
     return bookmark
 
+
 def get_subscriber_by_email(email):
-    return Subscriber.query.get(email)
+    return Subscriber.query.filter(Subscriber.email == email).first()
+
+# def get_bookmark_by_subscriber_id(subscriber_id):
+#     return Bookmark.query.filter()
 
 
 if __name__ == '__main__':
