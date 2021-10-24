@@ -42,7 +42,7 @@ def article_feed():
     print(res)
    
     data = res.json()
-    print(data)
+    # print(data)
     articles = data['articles']
     article_data = [{'source':article['source']['name'], 'title':article['title'], 
                     'author':article['author'], 'description':article['description'],
@@ -61,6 +61,22 @@ def article_feed():
 #     password = request.form.get('password')
 #     industry = request.form.get('industry')
 #     usecase = request.form.get('usecase')
+
+@app.route("/handle-bookmarks", methods=["POST"])
+def handle_bookmarks():
+    source = request.json.get("source")
+    # title = request.json.get("title")
+    # author = request.json.get("author")
+    # description  = request.json.get("description")
+    # url  = request.json.get("url")
+    # bookmark_date = td
+    # subscriber = Set this up when subscriber login is up and running maybe using a session?
+
+    return source
+
+    #call the crud function once you get the form inputs right
+
+
 
 
 

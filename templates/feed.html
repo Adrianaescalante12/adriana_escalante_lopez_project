@@ -1,36 +1,60 @@
 
 <h1> Gov-Fix Article Feed </h1>
-
+<!-- <script>
+    var today = new Date();
+    var date = today.getFullYear()+"-"+(today.getMonth()+1)+"-"+today.getDate();
+</script> -->
 <div id="article-request-results">
 <body>
-
-    {% for article in article_data %}
-        <table>
-            <tr>
-            <th>Source</th>
-            <td>{{article['source']}}</td>
-            <th>Title</th>
-            <td>{{article['title']}}</td>
-            <th>Author</th>
-            <td>{{article['author']}}</td>
-            <th>Description</th>
-            <td>{{article['description']}}</td>
-            <th>URL</th>
-            <td>{{article['url']}}</td>
-            <th>Bookmark?</th>
-            <td>
-                <form id=bookmark>
-                    <input type="checkbox" name="bookmark" value="Bookmark">  
-                </form>
-            </td>
-            </tr>
-        </table>
+    <div>
+        {% for article in article_data %}
         <form id=bookmark>
-            <button type="submit">Bookmark</button>
-        </form>
-    {% endfor %}
-
+            <table>
+                <tr>
+                <th>Source</th>
+                <td  id=source>{{article['source']}}</td>
+                <th>Title</th>
+                <td id=title>{{article['title']}}</td>
+                <th>Author</th>
+                <td  id=author>{{article['author']}}</td>
+                <th>Description</th>
+                <td  id=description>{{article['description']}}</td>
+                <th>URL</th>
+                <td  id=url>{{article['url']}}</td>
+                <th>Bookmark?</th>
+                <td><button type="submit">Bookmark</button></td>
+            </table>
+        </form> 
+        {% endfor %} 
+    </div>
 </body>
 </div>
 
 <!-- how to call your server to get those articles/ajax -->
+
+
+<!-- {% for i in range(article_data | length) %}
+<table>
+    <tr>
+    <th>Source</th>
+    <td class=source >{{article_data[i]['source']}}</td>
+    <th>Title</th>
+    <td class=title>{{article_data[i]['title']}}</td>
+    <th>Author</th>
+    <td class=author>{{article_data[i]['author']}}</td>
+    <th>Description</th>
+    <td class=description>{{article_data[i]['description']}}</td>
+    <th>URL</th>
+    <td class=url>{{article_data[i]['url']}}</td>
+    <th>Bookmark?</th>
+    <td>
+        <form>
+            <button type="submit" class=bookmark id="bookmark-button{{i}}" input-type="hidden" data-source="{{article_data[i]['source']}}" 
+            data-title="{{article_data[i]['title']}}", data-author="{{article_data[i]['author']}}" 
+            data-description="{{article_data[i]['description']}}" data-url="{{article_data[i]['url']}}" 
+            data-subscriber="1">Bookmark</button>
+        </form>
+    </td>
+    </tr>
+</table>
+{% endfor %} -->
