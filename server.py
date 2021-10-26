@@ -49,8 +49,10 @@ def article_feed():
                     'url':article['url']} for article in articles]
   
     # print(f"data as python: {articles}")
-   
-    return render_template("feed.html",article_data=article_data)
+    
+    subscribers_name = session.get("subscriber")
+
+    return render_template("feed.html",article_data=article_data, subscribers_name=session.get("subscriber"))
    
     #left side what I call in jinja template, right side server object/variable
 
@@ -77,6 +79,24 @@ def register_subscriber():
     return redirect("/")
 
 # the above is working but the flash is not. Why though?
+
+@app.route("/login", methods=["POST"])
+def handle_login():
+    email = request.form.get("email")
+    password = request.form.get("password")
+
+    if password == crud.subscriber_password(email):
+        session["subscriber"] = email
+        flash("Successful login")
+        return redirect("/article-feed")
+    # elif crud.subscriber_password(email) == "NoneType":
+    #     flash("Your password or email is incorrect.")
+    #     return redirect("/")
+    else:
+        flash("There is no account associated with your email")
+        return redirect("/")
+
+
 @app.route("/handle-bookmarks", methods=["POST"])
 def handle_bookmarks():
     """Create a new bookmark"""
