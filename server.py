@@ -101,14 +101,24 @@ def handle_login():
 def handle_bookmarks():
     """Create a new bookmark"""
     source = request.json.get("source")
-    # title = request.json.get("title")
-    # author = request.json.get("author")
-    # description  = request.json.get("description")
-    # url  = request.json.get("url")
-    # bookmark_date = td
-    # subscriber = Set this up when subscriber login is up and running maybe using a session?
+    title = request.json.get("title")
+    author = request.json.get("author")
+    description  = request.json.get("description")
+    url  = request.json.get("url")
+    bookmark_date = td
+    subscriber_email = session.get("subscriber")
+    subscriber_id = 1
 
-    return source
+    # if subscriber.id != None:
+    #     crud.create_bookmark(source, title, author, description, url, bookmark_date, subscriber)
+    #     flash("Successful Bookmark")
+    # else:
+    #     flash("Unsuccessful Bookmark. No id")
+
+    crud.create_bookmark(source, title, author, description, url, bookmark_date, subscriber_id)
+    flash("Successful Bookmark")
+
+    return redirect("article-feed")
 
     #call the crud function once you get the form inputs right
 

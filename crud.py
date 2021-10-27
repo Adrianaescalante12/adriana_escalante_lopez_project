@@ -13,14 +13,14 @@ def create_subscriber(fullname, email, password, industry, usecase):
 
     return subscriber
 
-def create_bookmark(source, title, author, description, url, bookmark_date, subscriber):
+def create_bookmark(source, title, author, description, url, bookmark_date, subscriber_id):
     bookmark = Bookmark(source=source, 
                         title=title, 
                         author=author, 
                         description=description, 
                         url=url, 
-                        bookmark_date=bookmarkdate,     
-                        subscriber=subscriber)
+                        bookmark_date=bookmark_date,     
+                        subscriber_id=subscriber_id)
 
     db.session.add(bookmark)
     db.session.commit()
@@ -30,6 +30,13 @@ def create_bookmark(source, title, author, description, url, bookmark_date, subs
 
 def get_subscriber_by_email(email):
     return Subscriber.query.filter(Subscriber.email == email).first()
+
+    # subscriber.id
+
+# def get_subscriber_id_by_email(email):
+#     return Subscriber.query.filter(Subscriber.email == email).first()
+
+#     # subscriber.id
 
 def subscriber_password(email):
     subscriber = Subscriber.query.filter(Subscriber.email == email).first()
