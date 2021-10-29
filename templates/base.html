@@ -2,11 +2,13 @@
 <html>
   <head></head>
   
-  {% for message in get_flashed_messages() %}
-    <li>{{ message }}</li>
-  {% endfor %}
-  
   <body>
+    {% with messages = get_flashed_messages() %}
+    {% for message in messages %}
+        <div class="alert alert-warning">{{ message }}</div>
+    {% endfor %}
+    {% endwith %}
+
     {% block body %}{% endblock %}
 
     {% block after_body %}{% endblock %}

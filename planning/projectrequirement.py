@@ -23,15 +23,15 @@ A news aggregator app where users can easily access government related articles.
 #### MVP
 
 - Users can view a list of government related articles and details about the article
-- Users can search filter time-frame and news company (language set to english by default)
-
-#### 2.0
-- Users can search by keyword
 - Users can star/bookmark articles to read later with its own dedicated section to access
 
-#### 3.0
+#### 2.0
+- Users can search filter time-frame and news company (language set to english by default)
+- Users can search by keyword
+- Ability to comment on articles
 
-- Ability to comment on articles and create a discussion with other users
+
+#### 3.0
 - Ability to bucket starred/bookmarked articles by a user-defined folder
 
 ### Notes

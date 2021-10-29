@@ -6,8 +6,8 @@ for (const x of bookmark) {
   x.addEventListener('click', (evt) => {
       evt.preventDefault();
       // debugger
-      const bookmark_target = evt.target;
-      console.log(bookmark_target);
+      const bookmarkTarget = evt.target;
+      console.log(bookmarkTarget);
       
       const formInputs = {
         
@@ -25,12 +25,17 @@ for (const x of bookmark) {
           },
           body: JSON.stringify(formInputs),
           })
-          .then((response) => response.json())
+          .then((response) => {
+            response.json();
+            alert(response);
+          })
           .then((responseJson) => {
             alert(responseJson.status);
           });
   });
 };
+
+// Debug 34 and 35
 
 
 
