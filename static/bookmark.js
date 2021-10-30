@@ -1,4 +1,5 @@
 "use strict";
+console.log("jsisworking")
 // const bookmark = document.querySelectorAll(".bookmark_this_article");
 const bookmark = document.querySelectorAll(".bookmark");
 // console.log(bookmark)
@@ -25,17 +26,13 @@ for (const x of bookmark) {
           },
           body: JSON.stringify(formInputs),
           })
-          .then((response) => {
-            response.json();
-            alert(response);
-          })
+          .then((response) => response.json())
           .then((responseJson) => {
-            alert(responseJson.status);
+            console.log(responseJson);
+            alert(responseJson.message);
           });
   });
 };
-
-// Debug 34 and 35
 
 
 

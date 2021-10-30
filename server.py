@@ -28,14 +28,18 @@ def homepage():
 def handle_login():
     email = request.form.get("email")
     password = request.form.get("password")
-    # first check if email exist/subscriber exists
-    if password == crud.subscriber_password(email):
-        session["subscriber"] = email
-        flash("Successful login")
-        return redirect("/article-feed")
-    else:
-        flash("Email or password is incorrect")
+    
+    if not crud.subscriber_password(email):
+        flash("No account exists with this email")
         return redirect("/")
+    else:
+        if password == crud.subscriber_password(email):
+            session["subscriber"] = email
+            flash("Successful login")
+            return redirect("/article-feed")
+        else:
+            flash("Email or password is incorrect")
+            return redirect("/")
 
 @app.route("/subscriber-sign-up", methods=["POST"])
 def register_subscriber():
@@ -84,7 +88,7 @@ def article_feed():
                     'author':article['author'], 'description':article['description'],
                     'url':article['url']} for article in articles]
   
-    # print(f"data as python: {articles}")
+    
     
     subscribers_name = session.get("subscriber")
 
@@ -104,26 +108,19 @@ def handle_bookmarks():
     subscriber_email = session.get("subscriber")
     subscriber_id = crud.subscriber_id(subscriber_email)
 
-
-    crud.create_bookmark(source, title, author, description, url, bookmark_date, subscriber_id)
-    flash("Successful Bookmark")
-
+    bookmark = crud.create_bookmark(source, title, author, description, url, bookmark_date, subscriber_id)
+    
     #Use javascript to add that alert bc the point of using ajax is to not refresh
+    #handle the case in case its not a 200 status
+    return jsonify({"data":bookmark.title,"status":200, "message":"Bookmark Added"})
 
-    return redirect("/article-feed")
-
-    #call the crud function once you get the form inputs right
 
 @app.route("/view-all-my-bookmarks")
 def all_my_bookmarks():
     #use session
     subscriber_email = session.get("subscriber")
-    print(subscriber_email)
     subscriber_id = crud.subscriber_id(subscriber_email)
-    print(subscriber_id)
     bookmarks = crud.get_bookmarks_by_subscriber_id(subscriber_id)
-
-
 
     return render_template("all-bookmarks.html", bookmarks=bookmarks)
 

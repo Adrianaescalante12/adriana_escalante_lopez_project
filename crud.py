@@ -27,7 +27,6 @@ def create_bookmark(source, title, author, description, url, bookmark_date, subs
 
     return bookmark
 
-
 def get_subscriber_by_email(email):
     return Subscriber.query.filter(Subscriber.email == email).first()
 
@@ -39,9 +38,11 @@ def subscriber_id(email):
 
 def subscriber_password(email):
     subscriber = Subscriber.query.filter(Subscriber.email == email).first()
-    subscriber_password = subscriber.password
-
-    return subscriber_password
+    # subscriber_password = subscriber.password
+    if subscriber is not None:
+        return subscriber.password
+    else:
+        return None
 
 def get_bookmarks_by_subscriber_id(subscriber_id):
     bookmarks = Bookmark.query.filter_by(subscriber_id=subscriber_id).all()

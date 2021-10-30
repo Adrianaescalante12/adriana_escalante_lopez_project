@@ -26,12 +26,17 @@ A news aggregator app where users can easily access government related articles.
 - Users can star/bookmark articles to read later with its own dedicated section to access
 
 #### 2.0
-- Users can search filter time-frame and news company (language set to english by default)
+Unbookmark
+- Prevent same bookmark (by URL, alert already bookmarked, dont add these)  OR do a server side check
+- Users can search filter time-frame
 - Users can search by keyword
+- Users can search filter news company (language set to english by default)
 - Ability to comment on articles
 
 
+
 #### 3.0
+- Graph of industry and use case
 - Ability to bucket starred/bookmarked articles by a user-defined folder
 
 ### Notes

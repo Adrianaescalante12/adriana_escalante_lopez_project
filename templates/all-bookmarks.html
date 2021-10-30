@@ -3,7 +3,7 @@
 {% block body %}  
 <h1> My Bookmarks </h1>
 <div id="all-my-bookmarks">
-
+<a href="http://localhost:5000/article-feed">Article feed</a>
 <body>
     <div>
         {% for bookmark in bookmarks %}
@@ -21,6 +21,7 @@
             <td class=url>{{bookmark.url}}</td>
         {% endfor %}
     </div>
+
     <script src="/static/bookmark.js"></script>
 </body>
 {% endblock %}
