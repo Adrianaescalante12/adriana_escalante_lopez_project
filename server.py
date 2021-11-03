@@ -26,6 +26,7 @@ def homepage():
 
 @app.route("/login", methods=["POST"])
 def handle_login():
+    """Log in users who's password matches their email"""
     email = request.form.get("email")
     password = request.form.get("password")
     
@@ -117,6 +118,7 @@ def handle_bookmarks():
 
 @app.route("/view-all-my-bookmarks")
 def all_my_bookmarks():
+    """View all bookmarks for subscriber logged in"""
     #use session
     subscriber_email = session.get("subscriber")
     subscriber_id = crud.subscriber_id(subscriber_email)
@@ -124,7 +126,17 @@ def all_my_bookmarks():
 
     return render_template("all-bookmarks.html", bookmarks=bookmarks)
 
+@app.route("/handle-unbookmark", methods=["POST"])
+def handle_bookmarks():
+    """Unbookmark an article"""
+    url  = request.json.get("url")
+    subscriber_email = session.get("subscriber")
+    subscriber_id = crud.subscriber_id(subscriber_email)
 
+    unbookmark = crud.delete_bookmark
+    
+
+#     return jsonify({"data":bookmark.title,"status":200, "message":"Unbookmark Successful"})
 
 
 if __name__ == "__main__":

@@ -19,6 +19,15 @@
             <td class=description>{{bookmark.description}}</td>
             <th>URL</th>
             <td class=url>{{bookmark.url}}</td>
+            <!-- <th>Unbookmark</th>
+            <td>
+                <form class="unbookmark">
+                    <button type="submit" id="bookmark-button{{i}}" input-type="hidden" data-source="{{article_data[i]['source']}}" 
+                    data-title="{{article_data[i]['title']}}", data-author="{{article_data[i]['author']}}" 
+                    data-description="{{article_data[i]['description']}}" data-url="{{article_data[i]['url']}}" 
+                    data-subscriber="1">Bookmark</button>
+                </form>
+            </td> -->
         {% endfor %}
     </div>
 

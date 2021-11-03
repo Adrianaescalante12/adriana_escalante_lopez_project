@@ -38,7 +38,7 @@ def subscriber_id(email):
 
 def subscriber_password(email):
     subscriber = Subscriber.query.filter(Subscriber.email == email).first()
-    # subscriber_password = subscriber.password
+    
     if subscriber is not None:
         return subscriber.password
     else:
@@ -48,8 +48,14 @@ def get_bookmarks_by_subscriber_id(subscriber_id):
     bookmarks = Bookmark.query.filter_by(subscriber_id=subscriber_id).all()
 
     return bookmarks
-    # for bookmark in bookmarks:
-    #     return bookmark
+
+def get_bookmark_id_by_url(url, subscriber_id):
+    unbookmark_url = Bookmark.query.filter((Bookmark.url==url)&(Bookmark.subscriber_id==subscriber_id)).first()
+    unnbookmark_id = unbookmark_url.bookmark_id
+
+    return unbookmark_id
+
+# def unbookmark():
 
 
 

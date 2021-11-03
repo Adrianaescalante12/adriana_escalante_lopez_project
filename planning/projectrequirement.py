@@ -26,7 +26,7 @@ A news aggregator app where users can easily access government related articles.
 - Users can star/bookmark articles to read later with its own dedicated section to access
 
 #### 2.0
-Unbookmark
+- Unbookmark
 - Prevent same bookmark (by URL, alert already bookmarked, dont add these)  OR do a server side check
 - Users can search filter time-frame
 - Users can search by keyword
