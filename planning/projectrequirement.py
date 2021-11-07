@@ -22,12 +22,12 @@ A news aggregator app where users can easily access government related articles.
 
 #### MVP
 
-- Users can view a list of government related articles and details about the article
-- Users can star/bookmark articles to read later with its own dedicated section to access
+# - Users can view a list of government related articles and details about the article
+# - Users can star/bookmark articles to read later with its own dedicated section to access
 
 #### 2.0
-- Unbookmark
-- Prevent same bookmark (by URL, alert already bookmarked, dont add these)  OR do a server side check
+# - Unbookmark
+- Prevent same bookmark (by URL, alert already bookmarked, dont add these) OR do a server side check
 - Users can search filter time-frame
 - Users can search by keyword
 - Users can search filter news company (language set to english by default)

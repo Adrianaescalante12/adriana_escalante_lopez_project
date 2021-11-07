@@ -68,10 +68,11 @@ def register_subscriber():
 @app.route("/article-feed")
 def article_feed():
     """Connect to the NEWSAPI to get articles from past two weeks based on keywords and popularity"""
-
+    keywordsearch = request.args.get("keywordsearch")
     url = f'https://newsapi.org/v2/everything'
     payload = {'language': 'en',
-               'q': 'Department of Commerce OR Department of Education OR Department of Energy OR Department of Health and Human Services OR Department of Homeland Security OR Department of Housing and Urban Development OR Department of Justice OR Department of Labor OR Department of State OR Department of Transportation OR Department of Treasury OR Department of Veterans Affairs OR Executive Office of the President',
+                # 'q': f'{keywordsearch}',
+               'q': f'Department of Commerce OR Department of Education OR Department of Energy OR Department of Health and Human Services OR Department of Homeland Security OR Department of Housing and Urban Development OR Department of Justice OR Department of Labor OR Department of State OR Department of Transportation OR Department of Treasury OR Department of Veterans Affairs OR Executive Office of the President OR {keywordsearch}',
                'from': '{td}',
                'to': '{two_weeks}',
                'sortBy': 'popularity'}
@@ -127,16 +128,16 @@ def all_my_bookmarks():
     return render_template("all-bookmarks.html", bookmarks=bookmarks)
 
 @app.route("/handle-unbookmark", methods=["POST"])
-def handle_bookmarks():
+def handle_unbookmark():
     """Unbookmark an article"""
     url  = request.json.get("url")
     subscriber_email = session.get("subscriber")
     subscriber_id = crud.subscriber_id(subscriber_email)
 
-    unbookmark = crud.delete_bookmark
+    unbookmark = crud.unbookmark(url, subscriber_id)
     
 
-#     return jsonify({"data":bookmark.title,"status":200, "message":"Unbookmark Successful"})
+    return jsonify({"status":200, "message":"Unbookmark Successful"})
 
 
 if __name__ == "__main__":

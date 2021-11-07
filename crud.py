@@ -49,13 +49,15 @@ def get_bookmarks_by_subscriber_id(subscriber_id):
 
     return bookmarks
 
-def get_bookmark_id_by_url(url, subscriber_id):
-    unbookmark_url = Bookmark.query.filter((Bookmark.url==url)&(Bookmark.subscriber_id==subscriber_id)).first()
-    unnbookmark_id = unbookmark_url.bookmark_id
+def unbookmark(url, subscriber_id):
+    
+    bookmark = Bookmark.query.filter((Bookmark.url==url)&(Bookmark.subscriber_id==subscriber_id)).delete()
+    print(bookmark)
 
-    return unbookmark_id
+    db.session.commit()
 
-# def unbookmark():
+    return bookmark
+    
 
 
 

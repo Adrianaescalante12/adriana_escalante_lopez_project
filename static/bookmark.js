@@ -37,3 +37,29 @@ for (const x of bookmark) {
 
 
 
+const unbookmark = document.querySelectorAll(".unbookmark");
+
+for (const x of unbookmark) {
+  x.addEventListener('click', (evt) => {
+      // debugger
+      const unbookmarkTarget = evt.target;
+      console.log(unbookmarkTarget);
+      
+      const formInputs = {
+          url: evt.target.getAttribute('data-url')
+      };
+
+      fetch("/handle-unbookmark", {
+          method: "POST",
+          headers: {
+              'Content-Type': 'application/json'
+          },
+          body: JSON.stringify(formInputs),
+          })
+          .then((response) => response.json())
+          .then((responseJson) => {
+            console.log(responseJson);
+            alert(responseJson.message);
+          });
+  });
+};

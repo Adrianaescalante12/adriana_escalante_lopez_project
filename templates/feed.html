@@ -4,6 +4,27 @@
 <h1> Welcome {{ subscribers_name }} to the Gov-Fix Article Feed </h1>
 <div id="article-request-results">
 
+<head>
+    <div>
+        <label for="start">Start date:</label>
+
+        <input type="date" id="start" name="articlefeed-from"
+        value="2018-07-22"
+        min="2018-01-01" max="2018-12-31">
+
+        <label for="end">End date:</label>
+
+        <input type="date" id="end" name="articlefeed-to"
+                value="2018-07-22"
+                min="2018-01-01" max="2018-12-31">
+    </div>
+    <div>  
+    <form action="/article-feed" id="add_keyword">
+        <label>Search another Govt Keyword:<input type="text" name= "keywordsearch" autocomplete="Search"></label>
+        <input type="submit" value="Submit">
+    </form>
+    </div>
+</head>
 
 <body>
     <div>

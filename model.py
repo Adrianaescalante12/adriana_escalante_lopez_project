@@ -1,6 +1,7 @@
 """ Model for GovFix app """
 
 from flask_sqlalchemy import SQLAlchemy
+# from sqlalchemy import delete
 from datetime import datetime
 db = SQLAlchemy()
 
