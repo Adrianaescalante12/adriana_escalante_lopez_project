@@ -66,13 +66,13 @@ def register_subscriber():
 
 
 @app.route("/article-feed")
+#POST
 def article_feed():
     """Connect to the NEWSAPI to get articles from past two weeks based on keywords and popularity"""
-    keywordsearch = request.args.get("keywordsearch")
+    
     url = f'https://newsapi.org/v2/everything'
     payload = {'language': 'en',
-                # 'q': f'{keywordsearch}',
-               'q': f'Department of Commerce OR Department of Education OR Department of Energy OR Department of Health and Human Services OR Department of Homeland Security OR Department of Housing and Urban Development OR Department of Justice OR Department of Labor OR Department of State OR Department of Transportation OR Department of Treasury OR Department of Veterans Affairs OR Executive Office of the President OR {keywordsearch}',
+               'q': f'Department of Commerce OR Department of Education OR Department of Energy OR Department of Health and Human Services OR Department of Homeland Security OR Department of Housing and Urban Development OR Department of Justice OR Department of Labor OR Department of State OR Department of Transportation OR Department of Treasury OR Department of Veterans Affairs OR Executive Office of the President',
                'from': '{td}',
                'to': '{two_weeks}',
                'sortBy': 'popularity'}
@@ -93,10 +93,51 @@ def article_feed():
     
     
     subscribers_name = session.get("subscriber")
-
+    #return the article data not the template
     return render_template("feed.html",article_data=article_data, subscribers_name=session.get("subscriber"))
    
     #left side what I call in jinja template, right side server object/variable
+
+@app.route("/article-feed", methods=["POST"])
+def article_feed2():
+    """CUSTOMIZED request to NEWSAPI to get articles from past two weeks based on user keyword search"""
+    keywordsearch = request.form.get("keywordsearch")
+    start = request.form.get("articlefeed-from")
+    
+    # print(start)
+    end = request.form.get("articlefeed-to")
+   
+    # print(end)
+
+
+    url = f'https://newsapi.org/v2/everything'
+    payload = {'language': 'en',
+                'q': f'{keywordsearch}',
+               'from': f'{start}',
+               'to': f'{end}',
+               'sortBy': 'popularity'}
+    headers = {'X-Api-Key': API_KEY,
+               'Accept': 'application/json',
+               'Content-Type': 'application/json'}
+    
+    res = requests.get(url, params=payload, headers=headers)
+    # print(res)
+    # print(f"********************{keywordsearch}")
+   
+    data = res.json()
+    # print(data)
+    articles = data['articles']
+    article_data = [{'source':article['source']['name'], 'title':article['title'], 
+                    'author':article['author'], 'description':article['description'],
+                    'url':article['url']} for article in articles]
+  
+    
+    
+    subscribers_name = session.get("subscriber")
+    
+    return render_template("feed.html",article_data=article_data, subscribers_name=session.get("subscriber"))
+   
+    
 
 @app.route("/handle-bookmarks", methods=["POST"])
 def handle_bookmarks():
@@ -138,6 +179,7 @@ def handle_unbookmark():
     
 
     return jsonify({"status":200, "message":"Unbookmark Successful"})
+
 
 
 if __name__ == "__main__":
