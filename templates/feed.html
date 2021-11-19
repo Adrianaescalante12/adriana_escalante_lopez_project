@@ -5,28 +5,25 @@
 <div id="article-request-results">
 
 <head>
-    <div>
+   <div>
+       <h4>Start date cannot be any date before a month from today</h4>
+       <!-- If statement for value one or the other (interpolation?)-->
         <form action="/article-feed" id="date_range" method="POST">
-            <label for="start">Start date:</label>
-
-            <input type="date" id="start" name="articlefeed-from"
-            value="2021-10-12"
+            
+           <label for="start">Start date:</label>
+            
+            <input type="date" id="start" name="articlefeed-from" value={{ TWO_WEEKS }}
             min="2021-10-12" max="2022-12-31">
 
             <label for="end">End date:</label>
 
             <input type="date" id="end" name="articlefeed-to"
-                    value="2021-10-12"
-                    min="2020-01-01" max="2022-12-31">
+                    value={{ td }}
+                    min="2021-10-12" max="2022-12-31">
+        
+            <label>Search another Keyword:<input type="text" name= "keywordsearch" ></label>
             <input type="submit" value="Submit">
         </form>
-    </div>
-
-    <div>  
-    <form action="/article-feed" id="add_keyword" method="POST">
-        <label>Search another Keyword:<input type="text" name= "keywordsearch" autocomplete="Search"></label>
-        <input type="submit" value="Submit">
-    </form>
     </div>
 </head>
 

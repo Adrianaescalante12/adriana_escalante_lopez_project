@@ -17,7 +17,7 @@ API_KEY = os.environ['NEWSAPI_KEY']
 td = datetime.now().strftime('%Y-%m-%dT%H:%M:%S.%f%z')
 
 #date 2 weeks ago (12 days ago)
-two_weeks = datetime.now() -  timedelta(days = 12)
+TWO_WEEKS = datetime.now() -  timedelta(days = 12)
 
 @app.route("/")
 def homepage():
@@ -66,15 +66,14 @@ def register_subscriber():
 
 
 @app.route("/article-feed")
-#POST
 def article_feed():
     """Connect to the NEWSAPI to get articles from past two weeks based on keywords and popularity"""
     
     url = f'https://newsapi.org/v2/everything'
     payload = {'language': 'en',
                'q': f'Department of Commerce OR Department of Education OR Department of Energy OR Department of Health and Human Services OR Department of Homeland Security OR Department of Housing and Urban Development OR Department of Justice OR Department of Labor OR Department of State OR Department of Transportation OR Department of Treasury OR Department of Veterans Affairs OR Executive Office of the President',
-               'from': '{td}',
-               'to': '{two_weeks}',
+               'from': f'{td}',
+               'to': f'{TWO_WEEKS}',
                'sortBy': 'popularity'}
     headers = {'X-Api-Key': API_KEY,
                'Accept': 'application/json',
@@ -94,7 +93,7 @@ def article_feed():
     
     subscribers_name = session.get("subscriber")
     #return the article data not the template
-    return render_template("feed.html",article_data=article_data, subscribers_name=session.get("subscriber"))
+    return render_template("feed.html",article_data=article_data, subscribers_name=session.get("subscriber"), TWO_WEEKS=TWO_WEEKS, td=td)
    
     #left side what I call in jinja template, right side server object/variable
 
@@ -103,30 +102,35 @@ def article_feed2():
     """CUSTOMIZED request to NEWSAPI to get articles from past two weeks based on user keyword search"""
     keywordsearch = request.form.get("keywordsearch")
     start = request.form.get("articlefeed-from")
-    
+    # print(start)
     # print(start)
     end = request.form.get("articlefeed-to")
-   
+    print(TWO_WEEKS)
     # print(end)
 
 
     url = f'https://newsapi.org/v2/everything'
     payload = {'language': 'en',
-                'q': f'{keywordsearch}',
+                'q': 'Department of Commerce OR Department of Education OR Department of Energy OR Department of Health and Human Services OR Department of Homeland Security OR Department of Housing and Urban Development OR Department of Justice OR Department of Labor OR Department of State OR Department of Transportation OR Department of Treasury OR Department of Veterans Affairs OR Executive Office of the President',
                'from': f'{start}',
                'to': f'{end}',
                'sortBy': 'popularity'}
+    if keywordsearch:
+        payload['q'] = keywordsearch
+
+    
     headers = {'X-Api-Key': API_KEY,
                'Accept': 'application/json',
                'Content-Type': 'application/json'}
     
     res = requests.get(url, params=payload, headers=headers)
-    # print(res)
+    print(res)
     # print(f"********************{keywordsearch}")
    
     data = res.json()
-    # print(data)
+    print(data)
     articles = data['articles']
+    print(articles)
     article_data = [{'source':article['source']['name'], 'title':article['title'], 
                     'author':article['author'], 'description':article['description'],
                     'url':article['url']} for article in articles]
@@ -135,7 +139,7 @@ def article_feed2():
     
     subscribers_name = session.get("subscriber")
     
-    return render_template("feed.html",article_data=article_data, subscribers_name=session.get("subscriber"))
+    return render_template("feed.html", article_data=article_data, subscribers_name=session.get("subscriber"), td=td, TWO_WEEKS=TWO_WEEKS, start=start, end=end)
    
     
 
