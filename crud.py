@@ -49,6 +49,11 @@ def get_bookmarks_by_subscriber_id(subscriber_id):
 
     return bookmarks
 
+def get_bookmark_urls_by_subscriber_id(subscriber_id):
+    bookmarks = Bookmark.query.filter_by(subscriber_id=subscriber_id).all()
+    bookmark_urls = [bookmark.url for bookmark in bookmarks]
+    return bookmark_urls
+
 def unbookmark(url, subscriber_id):
     
     bookmark = Bookmark.query.filter((Bookmark.url==url)&(Bookmark.subscriber_id==subscriber_id)).delete()
@@ -58,9 +63,6 @@ def unbookmark(url, subscriber_id):
 
     return bookmark
     
-
-
-
 
 
 if __name__ == '__main__':

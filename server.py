@@ -13,13 +13,17 @@ app.jinja_env.undefined = StrictUndefined
 
 API_KEY = os.environ['NEWSAPI_KEY']
 
-#today's date, turned to ISO 8601 format
+#today's date, turned to ISO 8601 format for db
 td = datetime.now().strftime('%Y-%m-%dT%H:%M:%S.%f%z')
 
 #date 2 weeks ago (12 days ago)
 TWO_WEEKS = datetime.now() -  timedelta(days = 12)
 
+#today's date for feed form
 td2 = datetime.now().strftime('%Y-%m-%d')
+
+#One month from today for feed form
+ONE_MONTH = datetime.now() -  timedelta(days = 30)
 
 @app.route("/")
 def homepage():
@@ -94,7 +98,7 @@ def article_feed():
     
     
     subscribers_name = session.get("subscriber")
-    return render_template("feed.html",article_data=article_data, subscribers_name=session.get("subscriber"), TWO_WEEKS=TWO_WEEKS, td=td, td2=td2)
+    return render_template("feed.html",article_data=article_data, subscribers_name=session.get("subscriber"), TWO_WEEKS=TWO_WEEKS, td=td, td2=td2, ONE_MONTH=ONE_MONTH)
     #left side what I call in jinja template, right side server object/variable
 
 @app.route("/article-feed", methods=["POST"])
@@ -104,7 +108,7 @@ def article_feed2():
     start = request.form.get("articlefeed-from")
     # print(start)
     end = request.form.get("articlefeed-to")
-    print(TWO_WEEKS)
+    # print(TWO_WEEKS)
     # print(end)
 
 
@@ -123,7 +127,7 @@ def article_feed2():
                'Content-Type': 'application/json'}
     
     res = requests.get(url, params=payload, headers=headers)
-    print(res)
+    # print(res)
     # print(f"********************{keywordsearch}")
    
     data = res.json()
@@ -135,12 +139,10 @@ def article_feed2():
                     'url':article['url']} for article in articles]
   
     
-    # 
     subscribers_name = session.get("subscriber")
     
-    return render_template("feed.html", article_data=article_data, subscribers_name=session.get("subscriber"), td2=td2, TWO_WEEKS=TWO_WEEKS, start=start, end=end, banana="2021-10-12")
-   
-    
+    return render_template("feed.html", article_data=article_data, subscribers_name=session.get("subscriber"), td2=td2, TWO_WEEKS=TWO_WEEKS, start=start, end=end, ONE_MONTH=ONE_MONTH)
+
 
 @app.route("/handle-bookmarks", methods=["POST"])
 def handle_bookmarks():
@@ -153,13 +155,15 @@ def handle_bookmarks():
     bookmark_date = td
     subscriber_email = session.get("subscriber")
     subscriber_id = crud.subscriber_id(subscriber_email)
-
-    bookmark = crud.create_bookmark(source, title, author, description, url, bookmark_date, subscriber_id)
     
-    #Use javascript to add that alert bc the point of using ajax is to not refresh
-    #handle the case in case its not a 200 status
-    return jsonify({"data":bookmark.title,"status":200, "message":"Bookmark Added"})
-
+    bookmark_urls = crud.get_bookmark_urls_by_subscriber_id(subscriber_id)
+    
+    if url not in bookmark_urls:
+        bookmark = crud.create_bookmark(source, title, author, description, url, bookmark_date, subscriber_id)
+        return jsonify({"data":bookmark.title, "status":200, "message":"Bookmark Added"})
+    else: 
+        return jsonify({"data":bookmark.title, "status":500, "message":"Bookmark cannot be added"})
+    #FIX THIS ELSE!
 
 @app.route("/view-all-my-bookmarks")
 def all_my_bookmarks():
