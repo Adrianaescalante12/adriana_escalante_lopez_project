@@ -6,7 +6,7 @@
 
 <head>
    <div>
-       <h4>Start date cannot be any date before a month from today</h4>
+       <h4>Warning: Start date cannot be any date before a month from today</h4>
        <!-- If statement for value one or the other (interpolation?)-->
         <form action="/article-feed" id="date_range" method="POST">
             
@@ -17,9 +17,8 @@
 
             <label for="end">End date:</label>
 
-            <input type="date" id="end" name="articlefeed-to"
-                    value={{ td }}
-                    min="2021-10-12" max="2022-12-31">
+            <input type="date" id="end" name="articlefeed-to" value={{ td2 }}
+            min="2021-10-12" max="2022-12-31">
         
             <label>Search another Keyword:<input type="text" name= "keywordsearch" ></label>
             <input type="submit" value="Submit">

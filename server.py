@@ -19,6 +19,8 @@ td = datetime.now().strftime('%Y-%m-%dT%H:%M:%S.%f%z')
 #date 2 weeks ago (12 days ago)
 TWO_WEEKS = datetime.now() -  timedelta(days = 12)
 
+td2 = datetime.now().strftime('%Y-%m-%d')
+
 @app.route("/")
 def homepage():
     """Homepage linking to jinja template with forms for sign in and subscriber sign up"""
@@ -92,9 +94,7 @@ def article_feed():
     
     
     subscribers_name = session.get("subscriber")
-    #return the article data not the template
-    return render_template("feed.html",article_data=article_data, subscribers_name=session.get("subscriber"), TWO_WEEKS=TWO_WEEKS, td=td)
-   
+    return render_template("feed.html",article_data=article_data, subscribers_name=session.get("subscriber"), TWO_WEEKS=TWO_WEEKS, td=td, td2=td2)
     #left side what I call in jinja template, right side server object/variable
 
 @app.route("/article-feed", methods=["POST"])
@@ -102,7 +102,6 @@ def article_feed2():
     """CUSTOMIZED request to NEWSAPI to get articles from past two weeks based on user keyword search"""
     keywordsearch = request.form.get("keywordsearch")
     start = request.form.get("articlefeed-from")
-    # print(start)
     # print(start)
     end = request.form.get("articlefeed-to")
     print(TWO_WEEKS)
@@ -136,10 +135,10 @@ def article_feed2():
                     'url':article['url']} for article in articles]
   
     
-    
+    # 
     subscribers_name = session.get("subscriber")
     
-    return render_template("feed.html", article_data=article_data, subscribers_name=session.get("subscriber"), td=td, TWO_WEEKS=TWO_WEEKS, start=start, end=end)
+    return render_template("feed.html", article_data=article_data, subscribers_name=session.get("subscriber"), td2=td2, TWO_WEEKS=TWO_WEEKS, start=start, end=end, banana="2021-10-12")
    
     
 
