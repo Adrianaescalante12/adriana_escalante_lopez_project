@@ -36,6 +36,12 @@ def subscriber_id(email):
 
     return subscriber_id
 
+def subscriber_name(email):
+    subscriber =  Subscriber.query.filter(Subscriber.email == email).first()
+    subscriber_name = subscriber.full_name
+
+    return subscriber_name
+
 def subscriber_password(email):
     subscriber = Subscriber.query.filter(Subscriber.email == email).first()
     

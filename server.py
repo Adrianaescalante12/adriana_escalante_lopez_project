@@ -97,8 +97,9 @@ def article_feed():
   
     
     
-    subscribers_name = session.get("subscriber")
-    return render_template("feed.html",article_data=article_data, subscribers_name=session.get("subscriber"), TWO_WEEKS=TWO_WEEKS, td=td, td2=td2, ONE_MONTH=ONE_MONTH)
+    email = session.get("subscriber")
+    subscriber_name = crud.subscriber_name(email)
+    return render_template("feed.html",article_data=article_data, subscribers_name=subscriber_name, TWO_WEEKS=TWO_WEEKS, td=td, td2=td2, ONE_MONTH=ONE_MONTH)
     #left side what I call in jinja template, right side server object/variable
 
 @app.route("/article-feed", methods=["POST"])
@@ -139,9 +140,10 @@ def article_feed2():
                     'url':article['url']} for article in articles]
   
     
-    subscribers_name = session.get("subscriber")
+    email = session.get("subscriber")
+    subscriber_name = crud.subscriber_name(email)
     
-    return render_template("feed.html", article_data=article_data, subscribers_name=session.get("subscriber"), td2=td2, TWO_WEEKS=TWO_WEEKS, start=start, end=end, ONE_MONTH=ONE_MONTH)
+    return render_template("feed.html", article_data=article_data, subscribers_name=subscriber_name, td2=td2, TWO_WEEKS=TWO_WEEKS, start=start, end=end, ONE_MONTH=ONE_MONTH)
 
 
 @app.route("/handle-bookmarks", methods=["POST"])
@@ -162,7 +164,7 @@ def handle_bookmarks():
         bookmark = crud.create_bookmark(source, title, author, description, url, bookmark_date, subscriber_id)
         return jsonify({"data":bookmark.title, "status":200, "message":"Bookmark Added"})
     else: 
-        return jsonify({"data":title, "status":500, "message":"Bookmark cannot be added"})
+        return jsonify({"data":title, "status":500, "message":"Bookmark already exists"})
     #FIX THIS ELSE!
 
 @app.route("/view-all-my-bookmarks")
@@ -172,7 +174,7 @@ def all_my_bookmarks():
     subscriber_email = session.get("subscriber")
     subscriber_id = crud.subscriber_id(subscriber_email)
     bookmarks = crud.get_bookmarks_by_subscriber_id(subscriber_id)
-
+    
     return render_template("all-bookmarks.html", bookmarks=bookmarks)
 
 @app.route("/handle-unbookmark", methods=["POST"])
