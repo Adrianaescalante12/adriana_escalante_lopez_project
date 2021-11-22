@@ -162,7 +162,7 @@ def handle_bookmarks():
         bookmark = crud.create_bookmark(source, title, author, description, url, bookmark_date, subscriber_id)
         return jsonify({"data":bookmark.title, "status":200, "message":"Bookmark Added"})
     else: 
-        return jsonify({"data":bookmark.title, "status":500, "message":"Bookmark cannot be added"})
+        return jsonify({"data":title, "status":500, "message":"Bookmark cannot be added"})
     #FIX THIS ELSE!
 
 @app.route("/view-all-my-bookmarks")
