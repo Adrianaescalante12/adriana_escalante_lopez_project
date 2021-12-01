@@ -48,6 +48,13 @@ def handle_login():
             flash("Email or password is incorrect")
             return redirect("/")
 
+@app.route("/logout")
+def handle_logout():
+    signout = request.args.get("signoutuser")
+    print(signout)
+    if signout is None:
+        return redirect("/")
+
 @app.route("/subscriber-sign-up", methods=["POST"])
 def register_subscriber():
     """Create a new subscriber"""
@@ -62,11 +69,11 @@ def register_subscriber():
     
     if subscriber:
         flash("There seems to be an account associated to this email already.")
-        print("reached the if subscriber")
+        # print("reached the if subscriber")
     else:
         crud.create_subscriber(fullname, email, password, industry, usecase)
         flash("Account created successfully. Try logging in.")
-        print("reached the else create subscriber")
+        # print("reached the else create subscriber")
     
     return redirect("/")
 
@@ -74,33 +81,38 @@ def register_subscriber():
 @app.route("/article-feed")
 def article_feed():
     """Connect to the NEWSAPI to get articles from past two weeks based on keywords and popularity"""
+    #Do not allow users not logged in to enter this page
+    subscriber = session.get("subscriber")
+    if subscriber is  None:
+        return redirect("/")
     
     url = f'https://newsapi.org/v2/everything'
     payload = {'language': 'en',
-               'q': f'Department of Commerce OR Department of Education OR Department of Energy OR Department of Health and Human Services OR Department of Homeland Security OR Department of Housing and Urban Development OR Department of Justice OR Department of Labor OR Department of State OR Department of Transportation OR Department of Treasury OR Department of Veterans Affairs OR Executive Office of the President',
-               'from': f'{td}',
-               'to': f'{TWO_WEEKS}',
-               'sortBy': 'popularity'}
+            'q': f'Department of Commerce OR Department of Education OR Department of Energy OR Department of Health and Human Services OR Department of Homeland Security OR Department of Housing and Urban Development OR Department of Justice OR Department of Labor OR Department of State OR Department of Transportation OR Department of Treasury OR Department of Veterans Affairs OR Executive Office of the President',
+            'from': f'{td}',
+            'to': f'{TWO_WEEKS}',
+            'sortBy': 'popularity'}
     headers = {'X-Api-Key': API_KEY,
-               'Accept': 'application/json',
-               'Content-Type': 'application/json'}
+            'Accept': 'application/json',
+            'Content-Type': 'application/json'}
     
     res = requests.get(url, params=payload, headers=headers)
     print(res)
-   
+
     data = res.json()
     # print(data)
     articles = data['articles']
     article_data = [{'source':article['source']['name'], 'title':article['title'], 
                     'author':article['author'], 'description':article['description'],
                     'url':article['url']} for article in articles]
-  
+
     
     
     email = session.get("subscriber")
     subscriber_name = crud.subscriber_name(email)
     return render_template("feed.html",article_data=article_data, subscribers_name=subscriber_name, TWO_WEEKS=TWO_WEEKS, td=td, td2=td2, ONE_MONTH=ONE_MONTH)
     #left side what I call in jinja template, right side server object/variable
+    
 
 @app.route("/article-feed", methods=["POST"])
 def article_feed2():
