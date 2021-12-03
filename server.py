@@ -50,12 +50,13 @@ def handle_login():
 
 @app.route("/logout")
 def handle_logout():
-    signout = request.args.get("signoutuser")
-    print(signout)
-    if signout is None:
+    """Send user back to homepage and have them re log in if signed out (logic in article feed forces them to resign in)"""
+
+    if "subscriber" in session:
+        session.clear()
         return redirect("/")
 
-@app.route("/subscriber-sign-up", methods=["POST"])
+@app.route( "/subscriber-sign-up", methods=["POST"])
 def register_subscriber():
     """Create a new subscriber"""
     fullname = request.form.get('fullname')
