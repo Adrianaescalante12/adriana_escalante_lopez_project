@@ -1,9 +1,12 @@
 {% extends "base.html" %}
+ 
+{% block head %}  
+<head>
+    <h1> Welcome {{ subscribers_name }} to the Gov-Fix Article Feed </h1>
+</head>
+{% endblock %}
 
-{% block body %}  
-<h1> Welcome {{ subscribers_name }} to the Gov-Fix Article Feed </h1>
-<div id="article-request-results">
-
+{% block body %} 
 <head>
    <div>
        <h4>Warning: Start date cannot be any date before a month from today</h4>
@@ -27,39 +30,48 @@
             <button type="submit" autocomplete="True">Sign Out</button>
         </form>
         
-    
     </div>
-
+    
 </head>
 
 
 <body>
+    
     <div>
-        {% for i in range(article_data | length) %}
         <table>
-            <tr>
             <th>Source</th>
-            <td class=source>{{article_data[i]['source']}}</td>
             <th>Title</th>
-            <td class=title>{{article_data[i]['title']}}</td>
-            <th>Author</th>
-            <td class=author>{{article_data[i]['author']}}</td>
+            <th>Author</th> 
             <th>Description</th>
-            <td class=description>{{article_data[i]['description']}}</td>
             <th>URL</th>
-            <td class=url>{{article_data[i]['url']}}</td>
-            <th>Bookmark?</th>
-            <td>
-                <form class="bookmark">
-                    <button type="submit" id="bookmark-button{{i}}" input-type="hidden" data-source="{{article_data[i]['source']}}" 
-                    data-title="{{article_data[i]['title']}}", data-author="{{article_data[i]['author']}}" 
-                    data-description="{{article_data[i]['description']}}" data-url="{{article_data[i]['url']}}" 
-                    data-subscriber="1">Bookmark</button>
-                </form>
-            </td>
-            </tr>
+            <th>Bookmark</th>
+
+            {% for i in range(article_data | length) %}
+        
+                <tr>
+                    
+                    <td class=source>{{article_data[i]['source']}}</td>
+                    
+                    <td class=title>{{article_data[i]['title']}}</td>
+                    
+                    <td class=author>{{article_data[i]['author']}}</td>
+                    
+                    <td class=description>{{article_data[i]['description']}}</td>
+                    
+                    <td class=url>{{article_data[i]['url']}}</td>
+                    
+                    <td>
+                        <form class="bookmark">
+                            <button type="submit" id="bookmark-button{{i}}" input-type="hidden" data-source="{{article_data[i]['source']}}" 
+                            data-title="{{article_data[i]['title']}}", data-author="{{article_data[i]['author']}}" 
+                            data-description="{{article_data[i]['description']}}" data-url="{{article_data[i]['url']}}" 
+                            data-subscriber="1">Bookmark</button>
+                        </form>
+                    </td>
+                </tr>
+        
+            {% endfor %}
         </table>
-        {% endfor %}
 
         <a href="http://localhost:5000/view-all-my-bookmarks">My bookmarks</a>
     </div>

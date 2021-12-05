@@ -89,7 +89,7 @@ def article_feed():
     
     url = f'https://newsapi.org/v2/everything'
     payload = {'language': 'en',
-            'q': f'Department of Commerce OR Department of Education OR Department of Energy OR Department of Health and Human Services OR Department of Homeland Security OR Department of Housing and Urban Development OR Department of Justice OR Department of Labor OR Department of State OR Department of Transportation OR Department of Treasury OR Department of Veterans Affairs OR Executive Office of the President',
+            'q': f'Department of Commerce OR Department of Education OR Department of Energy OR Department of Defense OR Department of Homeland Security OR Department of Housing and Urban Development OR Department of Justice OR Department of Labor OR Department of State',
             'from': f'{td}',
             'to': f'{TWO_WEEKS}',
             'sortBy': 'popularity'}
@@ -98,7 +98,9 @@ def article_feed():
             'Content-Type': 'application/json'}
     
     res = requests.get(url, params=payload, headers=headers)
-    print(res)
+    # print(res.__dict__)
+    # print()
+    
 
     data = res.json()
     # print(data)
@@ -128,7 +130,7 @@ def article_feed2():
 
     url = f'https://newsapi.org/v2/everything'
     payload = {'language': 'en',
-                'q': 'Department of Commerce OR Department of Education OR Department of Energy OR Department of Health and Human Services OR Department of Homeland Security OR Department of Housing and Urban Development OR Department of Justice OR Department of Labor OR Department of State OR Department of Transportation OR Department of Treasury OR Department of Veterans Affairs OR Executive Office of the President',
+                'q': 'Department of Commerce OR Department of Education OR Department of Energy OR Department of Defense OR Department of Homeland Security OR Department of Housing and Urban Development OR Department of Justice OR Department of Labor OR Department of State',
                'from': f'{start}',
                'to': f'{end}',
                'sortBy': 'popularity'}

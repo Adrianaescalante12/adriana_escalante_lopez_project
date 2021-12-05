@@ -1,31 +1,44 @@
 {% extends "base.html" %}
-
+{% block head %}  
+<head>
+    <h1> My Bookmarks </h1> 
+    <a href="http://localhost:5000/article-feed">Back to Article Feed</a>
+</head>
+{% endblock %}
 {% block body %}  
-<h1> My Bookmarks </h1>
-<div id="all-my-bookmarks">
-<a href="http://localhost:5000/article-feed">Back to Article Feed</a>
+
 <body>
     <div>
-        {% for bookmark in bookmarks %}
         <table>
-            <tr>
             <th>Source</th>
-            <td class=source>{{bookmark.source}}</td>
             <th>Title</th>
-            <td class=title>{{bookmark.title}}</td>
-            <th>Author</th>
-            <td class=author>{{bookmark.author}}</td>
+            <th>Author</th> 
             <th>Description</th>
-            <td class=description>{{bookmark.description}}</td>
             <th>URL</th>
-            <td class=url>{{bookmark.url}}</td>
             <th>Unbookmark</th>
-            <td>
-                <form class="unbookmark">
-                    <button type="submit" input-type="hidden" data-url="{{bookmark.url}}">Unbookmark?</button>
-                </form>
-            </td>
-        {% endfor %}
+        
+            {% for bookmark in bookmarks %}
+            
+                <tr>
+                    
+                    <td class=source>{{bookmark.source}}</td>
+                    
+                    <td class=title>{{bookmark.title}}</td>
+                    
+                    <td class=author>{{bookmark.author}}</td>
+                    
+                    <td class=description>{{bookmark.description}}</td>
+                    
+                    <td class=url>{{bookmark.url}}</td>
+                    
+                    <td>
+                        <form class="unbookmark">
+                            <button type="submit" input-type="hidden" data-url="{{bookmark.url}}">Unbookmark</button>
+                        </form>
+                    </td>
+                </tr>
+            {% endfor %}
+         </table>        
     </div>
 
     <script src="/static/bookmark.js"></script>
