@@ -1,8 +1,28 @@
+
 head {
     font-family: Playfair Display;
 }
 
 body {
-    background-color: #d5d5d5;
+    background-color: #C0B3A0;
     font-family: Playfair Display;
+    color: #22252C; 
+    /* text-align: center; */
+    /* background: #d5d5d5 url("static/anna-sullivan-BBHIPz-gPXs-unsplash.jpg");
+    background-size: cover; */
 }
+
+a {
+    color:#3F3250;
+}
+
+/* img {
+    position: absolute;
+    opacity: 1;
+    height: auto;
+    width: auto;
+    height: 535px;
+    width: 100%;
+} */
+
+

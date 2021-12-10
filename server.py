@@ -51,10 +51,12 @@ def handle_login():
 @app.route("/logout")
 def handle_logout():
     """Send user back to homepage and have them re log in if signed out (logic in article feed forces them to resign in)"""
-
+    # print(session)
     if "subscriber" in session:
         session.clear()
+        # print(session)
         return redirect("/")
+
 
 @app.route( "/subscriber-sign-up", methods=["POST"])
 def register_subscriber():

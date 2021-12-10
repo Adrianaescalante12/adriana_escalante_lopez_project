@@ -1,3 +1,6 @@
 secrets.sh
 env
 __pycache__/
+.DS_Store
+d
+dict_practice.py

@@ -2,14 +2,16 @@
  
 {% block head %}  
 <head>
-    <h1> Welcome {{ subscribers_name }} to the Gov-Fix Article Feed </h1>
+    
+    <h1> Welcome {{ subscribers_name }} to the Gov-Fix Article Feed🔖 </h1>
+    
 </head>
 {% endblock %}
 
 {% block body %} 
 <head>
    <div>
-       <h4>Warning: Start date cannot be any date before a month from today</h4>
+       <h9>Warning: Start date cannot be any date before a month from today</h9>
         <form action="/article-feed" id="date_range" method="POST">
             
            <label for="start">Start date:</label>
@@ -26,10 +28,9 @@
             <input type="submit" value="Submit">
         </form>
       
-        <form action="/logout" id=signout name=signoutuser>
+        <form action="/logout" id="signout" name="signoutuser">
             <button type="submit" autocomplete="True">Sign Out</button>
-        </form>
-        
+        </form> 
     </div>
     
 </head>
@@ -58,7 +59,7 @@
                     
                     <td class=description>{{article_data[i]['description']}}</td>
                     
-                    <td class=url>{{article_data[i]['url']}}</td>
+                    <td class=url><a href="{{article_data[i]['url']}}">{{article_data[i]['url']}}</a></td>
                     
                     <td>
                         <form class="bookmark">
