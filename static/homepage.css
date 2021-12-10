@@ -1,0 +1,41 @@
+.centeredhead {
+    position: absolute;
+    top: 10%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    color:white;
+}
+
+body {
+    background: url("/static/news2.jpg") no-repeat center center fixed;
+    -webkit-background-size: cover;
+    -moz-background-size: cover;
+    -o-background-size: cover;
+    background-size: cover;
+    font-family: Playfair Display;
+    text-align: center;
+}
+
+#signinform.col {
+    padding-top: 300px;
+    padding-right: 80px;
+    padding-bottom: 50px;
+    padding-left: 90px;
+    color: white;
+    font-weight: bolder;
+}
+
+#signupform.col {
+    padding-top: 200px;
+    padding-right: 30px;
+    padding-bottom: 50px;
+    padding-left: 850px;
+    color:white;
+    font-weight: bolder;
+}
+
+.border-box {
+    width:200px;
+    padding:20px;
+    color: #96858F ;
+}
