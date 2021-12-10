@@ -9,69 +9,72 @@
 {% endblock %}
 
 {% block body %} 
-<head>
-   <div>
-       <h9>Warning: Start date cannot be any date before a month from today</h9>
-        <form action="/article-feed" id="date_range" method="POST">
-            
-           <label for="start">Start date:</label>
-            
-            <input type="date" id="start" name="articlefeed-from" value={{ TWO_WEEKS }}
-            min={{ ONE_MONTH }} max="2022-12-31">
+<body>
+   <div class="row">
+       <div class="col-11">
+            <h9>Warning: Start date cannot be any date before a month from today</h9>
+            <form action="/article-feed" id="date_range" method="POST">
+                
+            <label for="start">Start date:</label>
+                
+                <input type="date" id="start" name="articlefeed-from" value={{ TWO_WEEKS }}
+                min={{ ONE_MONTH }} max="2022-12-31">
 
-            <label for="end">End date:</label>
+                <label for="end">End date:</label>
 
-            <input type="date" id="end" name="articlefeed-to" value={{ td2 }}
-            min="2021-10-12" max="2022-12-31">
-        
-            <label>Search another Keyword:<input type="text" name= "keywordsearch" ></label>
-            <input type="submit" value="Submit">
-        </form>
-      
-        <form action="/logout" id="signout" name="signoutuser">
-            <button type="submit" autocomplete="True">Sign Out</button>
-        </form> 
+                <input type="date" id="end" name="articlefeed-to" value={{ td2 }}
+                min="2021-10-12" max="2022-12-31">
+            
+                <label>Search another Keyword:<input type="text" name= "keywordsearch" ></label>
+                <input type="submit" value="Submit">
+            </form>
+        </div>
+        <div class="col-1" style="margin:auto;vertical-align: bottom;">
+            <form action="/logout" name="signoutuser">
+                <button type="submit" autocomplete="True" id="signout">Sign Out</button>
+            </form>
+        </div>
     </div>
     
-</head>
-
-
-<body>
-    
+ 
     <div>
         <table>
-            <th>Source</th>
-            <th>Title</th>
-            <th>Author</th> 
-            <th>Description</th>
-            <th>URL</th>
-            <th>Bookmark</th>
-
-            {% for i in range(article_data | length) %}
-        
-                <tr>
-                    
-                    <td class=source>{{article_data[i]['source']}}</td>
-                    
-                    <td class=title>{{article_data[i]['title']}}</td>
-                    
-                    <td class=author>{{article_data[i]['author']}}</td>
-                    
-                    <td class=description>{{article_data[i]['description']}}</td>
-                    
-                    <td class=url><a href="{{article_data[i]['url']}}">{{article_data[i]['url']}}</a></td>
-                    
-                    <td>
-                        <form class="bookmark">
-                            <button type="submit" id="bookmark-button{{i}}" input-type="hidden" data-source="{{article_data[i]['source']}}" 
-                            data-title="{{article_data[i]['title']}}", data-author="{{article_data[i]['author']}}" 
-                            data-description="{{article_data[i]['description']}}" data-url="{{article_data[i]['url']}}" 
-                            data-subscriber="1">Bookmark</button>
-                        </form>
-                    </td>
-                </tr>
-        
-            {% endfor %}
+            <thead>
+                <th>Source</th>
+                <th>Title</th>
+                <th>Author</th> 
+                <th>Description</th>
+                <th>URL</th>
+                <th>Bookmark</th>
+            </thead>
+            
+            <tbody>
+                {% for i in range(article_data | length) %}
+                
+                    <tr>
+                        
+                        <td class=source>{{article_data[i]['source']}}</td>
+                        
+                        <td class=title>{{article_data[i]['title']}}</td>
+                        
+                        <td class=author>{{article_data[i]['author']}}</td>
+                        
+                        <td class=description>{{article_data[i]['description']}}</td>
+                        
+                        <td class=url><a href="{{article_data[i]['url']}}" target="_blank">{{article_data[i]['url']}}</a></td>
+                        
+                        <td>
+                            <form class="bookmark">
+                                <button type="submit" id="bookmark-button{{i}}" input-type="hidden" data-source="{{article_data[i]['source']}}" 
+                                data-title="{{article_data[i]['title']}}", data-author="{{article_data[i]['author']}}" 
+                                data-description="{{article_data[i]['description']}}" data-url="{{article_data[i]['url']}}" 
+                                data-subscriber="1">Bookmark</button>
+                            </form>
+                        </td>
+                    </tr>
+            
+                {% endfor %}
+            </tbody>
         </table>
 
         <a href="http://localhost:5000/view-all-my-bookmarks">My bookmarks</a>
@@ -79,4 +82,4 @@
     <script src="/static/bookmark.js"></script>
 </body>
 {% endblock %}
-</div>
+
