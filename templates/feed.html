@@ -10,6 +10,11 @@
 
 {% block body %} 
 <body>
+    <div class="col-1" style="margin:auto;vertical-align: bottom;">
+        <form action="/logout" name="signoutuser">
+            <button type="submit" autocomplete="True" id="signout">Sign Out</button>
+        </form>
+    </div>
    <div class="row">
        <div class="col-11">
             <h9>Warning: Start date cannot be any date before a month from today</h9>
@@ -29,11 +34,7 @@
                 <input type="submit" value="Submit">
             </form>
         </div>
-        <div class="col-1" style="margin:auto;vertical-align: bottom;">
-            <form action="/logout" name="signoutuser">
-                <button type="submit" autocomplete="True" id="signout">Sign Out</button>
-            </form>
-        </div>
+    
     </div>
     
  
