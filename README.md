@@ -9,9 +9,9 @@ Gov-Fix is a subscription based article feed pertaining to news articles that me
 ## Tech Stack Utilized:
 
 
-Languages: Python3, JavaScript, SQL, HTML, CSS
-Frameworks & Libraries: Flask, Jinja2, Bootstrap, jQuery
-Database & Industry Tools: PostgresSQL, SQLAlchemy, Git, Github
+- Languages: Python3, JavaScript, SQL, HTML, CSS
+- Frameworks & Libraries: Flask, Jinja2, Bootstrap, jQuery
+- Database & Industry Tools: PostgresSQL, SQLAlchemy, Git, Github
 
 ## Features Include:
 
