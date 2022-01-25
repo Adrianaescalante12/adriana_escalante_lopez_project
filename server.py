@@ -8,7 +8,6 @@ import os
 from jinja2 import StrictUndefined
 
 app = Flask(__name__)
-app.secret_key = "dev"
 app.jinja_env.undefined = StrictUndefined
 
 API_KEY = os.environ['NEWSAPI_KEY']
